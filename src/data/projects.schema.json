@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Portfolio project index",
+  "type": "object",
+  "required": ["projects"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "category", "summary", "technologies", "placeholder"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "technologies": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+          "placeholder": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}
