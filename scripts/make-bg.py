@@ -17,26 +17,20 @@ def bake(name, width, height, sizes, seed):
         return map_coordinates(rng.normal(size=(rows, columns)).astype('float32'),
                                [y * (rows - 1), x * (columns - 1)], order=3, mode='reflect')
 
-    # A broad reflection enters just beyond the top-right edge of the plate.
-    light = np.exp(-(.85 * (x - 1.08)**2 + .95 * (y + .08)**2))
-    wx = x + .035 * field(5, 7)
-    wy = y + .045 * field(5, 7)
+    # A flat pearl-blasted silver: even midtone, faint mottling, fine
+    # non-directional grain. No reflection and no tonal sweep.
     clouds = np.zeros_like(x)
-    for scale, amplitude in [(4, 7.8), (8, 4.2), (17, 2.0)]:
+    for scale, amplitude in [(4, 3.0), (8, 1.8), (17, .9)]:
         cols = max(4, round(scale * width / height))
-        cloud = rng.normal(size=(scale, cols)).astype('float32')
-        clouds += amplitude * map_coordinates(cloud, [wy*(scale-1), wx*(cols-1)],
-                                              order=3, mode='reflect')
-    signal = (129 + 102 * light) * (1 + clouds / 255)
-    signal -= 7.5 * np.exp(-((x - .29)**2 / .08 + (y - .65)**2 / .04))
+        clouds += amplitude * map_coordinates(
+            rng.normal(size=(scale, cols)).astype('float32'),
+            [y*(scale-1), x*(cols-1)], order=3, mode='reflect')
+    signal = 130 + clouds
 
     grit = rng.standard_normal((height, width), dtype='float32')
-    brushed = gaussian_filter(grit, (3.9, .50))
-    brushed /= brushed.std()
-    signal += 3.2 * brushed + 1.6 * grit
-    # Smooth shoulders preserve tonal detail at the extremes.
-    for bound, direction in [(118, 1), (231, -1)]:
-        signal = bound + direction * 2.0 * np.logaddexp(0, direction*(signal-bound)/2)
+    blasted = gaussian_filter(grit, (.85, .85))
+    blasted /= blasted.std()
+    signal += 6.4 * blasted + 2.75 * grit
     image = Image.fromarray(np.rint(signal).astype('uint8'))
     masters = ROOT / 'art/steel'
     output = ROOT / 'public/steel'

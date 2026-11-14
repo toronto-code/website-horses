@@ -1,5 +1,5 @@
-// Sculpt the large letters once at display resolution. The face stays partly
-// transparent so the plate's grain carries through as the heading scrolls.
+// Sculpt the large letters once at display resolution. The face is smooth,
+// bright silver over the grainy plate, like the raised lettering on a card.
 function render(element: HTMLElement) {
   const text = element.textContent?.trim()
   if (!text || !element.offsetWidth) return
@@ -57,17 +57,15 @@ function render(element: HTMLElement) {
   out.height = height
   const ctx = out.getContext('2d')
   if (!ctx) return
-  // A wide cast shadow, a tight contact shadow, and the exposed lower-left
-  // wall have different extents. Their separation gives the lettering height.
-  ctx.globalAlpha = .54
-  ctx.filter = 'blur(' + size * .028 * scale + 'px)'
-  ctx.drawImage(mask, -size * .026 * scale, size * .052 * scale)
-  ctx.globalAlpha = .59
-  ctx.filter = 'blur(' + size * .009 * scale + 'px)'
-  ctx.drawImage(mask, -size * .012 * scale, size * .024 * scale)
+  // Raised lettering: the face is polished silver catching light from above,
+  // while a wide soft cast and a tight contact shadow fall below it.
+  ctx.globalAlpha = .40
+  ctx.filter = 'blur(' + size * .032 * scale + 'px)'
+  ctx.drawImage(mask, size * .018 * scale, size * .050 * scale)
+  ctx.globalAlpha = .50
+  ctx.filter = 'blur(' + size * .011 * scale + 'px)'
+  ctx.drawImage(mask, size * .009 * scale, size * .024 * scale)
   ctx.filter = 'none'
-  ctx.globalAlpha = .56
-  ctx.drawImage(mask, -size * .007 * scale, size * .014 * scale)
   ctx.globalCompositeOperation = 'destination-out'
   ctx.globalAlpha = 1
   ctx.drawImage(mask, 0, 0)
@@ -79,12 +77,13 @@ function render(element: HTMLElement) {
     const nx = (field[i-1] - field[i+1]) * .5
     const ny = (field[i-width] - field[i+width]) * .5
     const norm = Math.hypot(nx, ny, 1)
-    const diffuse = (.50*nx - .73*ny + .466) / norm
-    const specular = Math.pow(Math.max(0, (.292*nx - .426*ny + .856) / norm), 17)
-    const shade = Math.max(-.88, Math.min(.96, .11 + (diffuse - .466) * 1.3 + specular * .60))
-    const value = shade > 0 ? 255 : 10
+    const lambert = (-.16*nx - .74*ny + .60) / norm
+    const diffuse = lambert + .057
+    const specular = Math.pow(Math.max(0, lambert), 16)
+    const shade = Math.max(-.85, Math.min(.95, .12 + (diffuse - .657) * 1.45 + specular * .5))
+    const value = Math.max(0, Math.min(255, Math.round(205 + 46 * shade)))
     pixels.data[p] = pixels.data[p+1] = pixels.data[p+2] = value
-    pixels.data[p+3] *= Math.abs(shade)
+    pixels.data[p+3] *= .94
   }
   pen.putImageData(pixels, 0, 0)
   ctx.drawImage(mask, 0, 0)
