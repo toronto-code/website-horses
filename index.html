@@ -1,48 +1,50 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#8c8e8c">
-    <link rel="icon" href="data:,">
-    <title>Rupert Kahng — Software Engineer</title>
-
-    <link rel="preload" as="image" type="image/webp" media="(orientation: landscape)" imagesrcset="/steel/landscape-960.webp 960w, /steel/landscape-1600.webp 1600w, /steel/landscape-2560.webp 2560w" imagesizes="max(100vw, 177.78vh)">
-    <link rel="preload" as="image" type="image/webp" media="(orientation: portrait)" imagesrcset="/steel/portrait-720.webp 720w, /steel/portrait-1080.webp 1080w" imagesizes="max(100vw, 56.25vh)">
-    <link rel="stylesheet" href="/src/style.css">
-    <script type="module" src="/src/main.ts"></script>
-  </head>
-  <body id="top">
-    <div class="steel" aria-hidden="true">
-      <picture>
-        <source media="(orientation: portrait)" srcset="/steel/portrait-720.webp 720w, /steel/portrait-1080.webp 1080w" sizes="max(100vw, 56.25vh)">
-        <img src="/steel/landscape-1600.webp" srcset="/steel/landscape-960.webp 960w, /steel/landscape-1600.webp 1600w, /steel/landscape-2560.webp 2560w" sizes="max(100vw, 177.78vh)" alt="" width="2560" height="1440" fetchpriority="high">
-      </picture>
-    </div>
-    <canvas id="herd" aria-hidden="true"></canvas>
-    <a class="skip" href="#main">Skip to content</a>
-    <header>
-      <nav aria-label="Primary">
-        <a href="#projects">Projects</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#playground">Playground</a>
-      </nav>
-    </header>
-    <main id="main" tabindex="-1">
-      <section class="hero" aria-labelledby="name">
-        <div class="signature">
-          <h1 id="name">Rupert <i>Kahng.</i></h1>
-          <p>Software Engineer</p>
-        </div>
-        <a class="explore" href="#projects">Explore work <span aria-hidden="true">↓</span></a>
-      </section>
-      <section class="notes" id="projects" aria-labelledby="work-title">
-        <h2 id="work-title">Selected work</h2>
-        <div id="project-list"></div>
-        <noscript><p>Sample projects include Terrain engine and Systems notebook.</p></noscript>
-      </section>
-      <section class="notes" id="about"><h2>About</h2><p>Rupert Kahng, software engineer.</p></section>
-      <section class="notes" id="contact"><h2>Contact</h2><p>Contact details to follow.</p></section>
-      <section class="notes" id="playground"><h2>Playground</h2><a href="/sprites/">Horse motion study</a></section>
-    </main>
-    <footer><a href="#top">Back to top ↑</a></footer>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b5b5b5">
+  <meta name="description" content="Rupert Kahng, Software Engineer. Projects, about, and contact.">
+  <meta property="og:title" content="Rupert Kahng — Software Engineer">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Software engineering portfolio of Rupert Kahng.">
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/style.css">
+  <title>Rupert Kahng — Software Engineer</title>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <picture class="plate" aria-hidden="true">
+    <source media="(orientation: portrait)" srcset="/steel/portrait-720.webp 720w, /steel/portrait-1080.webp 1080w" sizes="100vw">
+    <img src="/steel/landscape-1600.webp" srcset="/steel/landscape-960.webp 960w, /steel/landscape-1600.webp 1600w, /steel/landscape-2560.webp 2560w" sizes="100vw" fetchpriority="high" alt="">
+  </picture>
+  <div id="herd" aria-hidden="true"></div>
+  <header class="masthead">
+    <nav aria-label="Main navigation">
+      <a href="#projects">Projects</a><a href="#about">About</a><a href="#contact">Contact</a><a href="/playground/">Playground</a>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="name">
+      <h1 id="name" class="emboss">Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="intro-todo">[TODO] Introduction.</p>
+    </section>
+    <section id="projects" aria-labelledby="projects-title" class="section">
+      <h2 id="projects-title" class="emboss">Projects</h2>
+      <ol class="projects" id="project-index"></ol>
+    </section>
+    <section id="about" aria-labelledby="about-title" class="section">
+      <h2 id="about-title" class="emboss">About</h2>
+      <p>[TODO] Engineering background.</p>
+      <p>[TODO] Current work and interests.</p>
+    </section>
+    <section id="contact" aria-labelledby="contact-title" class="section">
+      <h2 id="contact-title" class="emboss">Contact</h2>
+      <p class="contacts">Email [TODO]<br>GitHub [TODO]<br>LinkedIn [TODO]</p>
+    </section>
+  </main>
+  <footer><a href="#top">Back to top</a></footer>
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>

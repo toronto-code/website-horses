@@ -1,0 +1,17 @@
+{
+  "width": 990,
+  "height": 582,
+  "count": 48,
+  "columns": 4,
+  "rows": 3,
+  "encodedWidth": 607,
+  "encodedHeight": 219,
+  "tile": {
+    "left": 178,
+    "top": 303,
+    "width": 758,
+    "height": 273
+  },
+  "stride": 240,
+  "baseline": 547
+}

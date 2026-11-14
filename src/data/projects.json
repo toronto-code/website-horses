@@ -1,21 +1,6 @@
-{
-  "$schema": "./projects.schema.json",
-  "projects": [
-    {
-      "id": "terrain-engine",
-      "title": "Terrain engine",
-      "category": "Graphics",
-      "summary": "A sample entry for a terrain-rendering project. Implementation notes and links will go here.",
-      "technologies": ["TypeScript", "Canvas"],
-      "placeholder": true
-    },
-    {
-      "id": "systems-notebook",
-      "title": "Systems notebook",
-      "category": "Developer tools",
-      "summary": "A sample entry for a developer tool. The project description and technical notes will go here.",
-      "technologies": [],
-      "placeholder": true
-    }
-  ]
-}
+[
+  { "title": "[TODO] Project title", "description": "[TODO] Project description.", "stack": "[TODO] Stack", "year": "[TODO] Year", "url": null },
+  { "title": "[TODO] Project title", "description": "[TODO] Project description.", "stack": "[TODO] Stack", "year": "[TODO] Year", "url": null },
+  { "title": "[TODO] Project title", "description": "[TODO] Project description.", "stack": "[TODO] Stack", "year": "[TODO] Year", "url": null },
+  { "title": "[TODO] Project title", "description": "[TODO] Project description.", "stack": "[TODO] Stack", "year": "[TODO] Year", "url": null }
+]

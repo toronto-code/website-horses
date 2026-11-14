@@ -1,0 +1,152 @@
+{
+  "viewport": "1440 \u00d7 900, device pixel ratio 2, local headless Chrome",
+  "requestedDrawnFps": 10,
+  "strideHorseLengths": 0.74,
+  "lanes": {
+    "far": {
+      "fps": 9.978,
+      "meanCpuRedrawMs": 0.735,
+      "p95CpuRedrawMs": 1.2,
+      "meanAdditionalReadbackMs": 3.39,
+      "stepPx": 29.304,
+      "loopSeconds": 6.34
+    },
+    "mid": {
+      "fps": 9.999,
+      "meanCpuRedrawMs": 0.736,
+      "p95CpuRedrawMs": 1.2,
+      "meanAdditionalReadbackMs": 3.41,
+      "stepPx": 53.28,
+      "loopSeconds": 4.115
+    },
+    "near": {
+      "fps": 10.0,
+      "meanCpuRedrawMs": 0.775,
+      "p95CpuRedrawMs": 1.3,
+      "meanAdditionalReadbackMs": 3.76,
+      "stepPx": 82.584,
+      "loopSeconds": 3.156
+    }
+  },
+  "madUnits": "Mean absolute alpha difference over the entire 640 \u00d7 320 canvas, range 0\u2013255. Captured from live near-horse exposures in sprite coordinates.",
+  "consecutiveMAD": 24.941,
+  "samePoseDifferentSeedMAD": 13.679,
+  "fixedRegistrationControl": {
+    "samePoseNoWobbleMAD": 13.264911804199217,
+    "threeStrideRepeat": true
+  },
+  "consecutivePairs": 15,
+  "samePosePairs": 8,
+  "frames": [
+    {
+      "sequence": 1,
+      "drawingIndex": 115,
+      "poseOneBased": 7
+    },
+    {
+      "sequence": 2,
+      "drawingIndex": 116,
+      "poseOneBased": 10
+    },
+    {
+      "sequence": 3,
+      "drawingIndex": 117,
+      "poseOneBased": 13
+    },
+    {
+      "sequence": 4,
+      "drawingIndex": 118,
+      "poseOneBased": 16
+    },
+    {
+      "sequence": 5,
+      "drawingIndex": 119,
+      "poseOneBased": 19
+    },
+    {
+      "sequence": 6,
+      "drawingIndex": 120,
+      "poseOneBased": 22
+    },
+    {
+      "sequence": 7,
+      "drawingIndex": 121,
+      "poseOneBased": 1
+    },
+    {
+      "sequence": 8,
+      "drawingIndex": 122,
+      "poseOneBased": 4
+    },
+    {
+      "sequence": 9,
+      "drawingIndex": 123,
+      "poseOneBased": 7
+    },
+    {
+      "sequence": 10,
+      "drawingIndex": 124,
+      "poseOneBased": 10
+    },
+    {
+      "sequence": 11,
+      "drawingIndex": 125,
+      "poseOneBased": 13
+    },
+    {
+      "sequence": 12,
+      "drawingIndex": 126,
+      "poseOneBased": 16
+    },
+    {
+      "sequence": 13,
+      "drawingIndex": 127,
+      "poseOneBased": 19
+    },
+    {
+      "sequence": 14,
+      "drawingIndex": 128,
+      "poseOneBased": 22
+    },
+    {
+      "sequence": 15,
+      "drawingIndex": 129,
+      "poseOneBased": 1
+    },
+    {
+      "sequence": 16,
+      "drawingIndex": 130,
+      "poseOneBased": 4
+    }
+  ],
+  "crossingDefinition": "Full canvas wrap, including reserved transparent padding. Calculated from measured CSS-pixel displacement and measured exposure interval.",
+  "redrawDefinition": "Wall-clock time to clear and issue all ink draw commands. Readback synchronization was measured separately and is not part of normal playback.",
+  "heldTransformChecks": 1425,
+  "betweenTickTransformChanges": 0,
+  "mobile": {
+    "overflow": false,
+    "count": 2
+  },
+  "reducedMotion": {
+    "static": true,
+    "pose": 21
+  },
+  "scroll": {
+    "poses": [
+      7,
+      11,
+      15,
+      19,
+      23,
+      2,
+      5,
+      8,
+      11,
+      14,
+      17
+    ],
+    "hash": "#projects",
+    "opacity": "0.22"
+  },
+  "browserErrors": []
+}

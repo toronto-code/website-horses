@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horse frames — Rupert Kahng</title><link rel="icon" href="/mark.svg"><link rel="stylesheet" href="/src/style.css"><link rel="stylesheet" href="/src/study.css"></head>
+<body class="study"><main><a href="/">Rupert Kahng</a><h1>Horse frames</h1>
+<div class="controls"><button type="button" id="previous" aria-label="Previous frame">Previous</button><label for="frame">Drawing <output id="current">01 / 24</output></label><input id="frame" type="range" min="0" max="23" value="0"><button type="button" id="next" aria-label="Next frame">Next</button><button type="button" id="play">Play</button></div>
+<div class="pair"><figure><canvas id="held" width="990" height="582"></canvas><figcaption>Original ink, lifted from the paper</figcaption></figure><figure><canvas id="pose" width="640" height="320"></canvas><figcaption>Selected drawing</figcaption></figure></div>
+<h2>Stride sequence</h2><div id="sequence"></div>
+<h2>Ink at original resolution</h2><div class="pair crops"><figure><canvas id="source-crop" width="300" height="140"></canvas><figcaption>Source</figcaption></figure><figure><canvas id="frame-crop" width="300" height="140"></canvas><figcaption>Frame</figcaption></figure></div></main>
+<script type="module" src="/src/study.ts"></script></body></html>
