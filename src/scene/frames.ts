@@ -1,16 +1,17 @@
-import atlasUrl from '../../art/horse/gallop/poses.png'
+import atlasUrl from '../../art/horse/collected/poses.png'
+import gait from '../../art/horse/collected/motion.json'
 import nibUrl from './assets/ink-nib.png'
 
-export const POSE_COUNT = 24
+export const POSE_COUNT = gait.count
 export const FRAME_WIDTH = 640
 export const FRAME_HEIGHT = 320
-export const FLIGHT_POSE = 21
+export const FLIGHT_POSE = 20
 export const GROUND_Y = 308
 export const HORSE_LENGTH = 490
 export const DRAWN_FPS = 10
-export const STRIDE_LENGTH = .74 * HORSE_LENGTH
-export const IDLE_POSE_STEP = 3
-export const SCROLL_POSE_STEP = 4
+export const STRIDE_LENGTH = gait.stridePx
+export const IDLE_POSE_STEP = 6
+export const SCROLL_POSE_STEP = 8
 export const SEED_CYCLE = 24
 
 export function drawingRate(value: string | null) {
@@ -78,7 +79,7 @@ export async function loadMaterials(): Promise<DrawingMaterials> {
   const ctx=buffer.getContext('2d',{willReadFrequently:true})!
   const poses: InkPose[]=[]
   for(let p=0;p<POSE_COUNT;p++){
-    ctx.drawImage(atlas,(p%6)*FRAME_WIDTH,Math.floor(p/6)*FRAME_HEIGHT,
+    ctx.drawImage(atlas,(p%gait.columns)*FRAME_WIDTH,Math.floor(p/gait.columns)*FRAME_HEIGHT,
       FRAME_WIDTH,FRAME_HEIGHT,0,0,FRAME_WIDTH,FRAME_HEIGHT)
     poses.push(readPose(ctx.getImageData(0,0,FRAME_WIDTH,FRAME_HEIGHT).data))
   }

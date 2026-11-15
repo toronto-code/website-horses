@@ -4,9 +4,9 @@ import {
 } from './frames'
 
 const lanes = [
-  { name:'far', size:.22, baseline:.44, alpha:.60, start:.58, pose:6, seed:17 },
-  { name:'mid', size:.40, baseline:.60, alpha:.81, start:-.06, pose:12, seed:31 },
-  { name:'near', size:.62, baseline:.84, alpha:1, start:.27, pose:FLIGHT_POSE, seed:47 },
+  { name:'far', size:.22, baseline:.44, alpha:.60, start:.58, pose:0, seed:17 },
+  { name:'mid', size:.40, baseline:.60, alpha:.81, start:-.06, pose:19, seed:31 },
+  { name:'near', size:.62, baseline:.84, alpha:1, start:.27, pose:38, seed:47 },
 ] as const
 
 export async function mountHerd(stage: HTMLElement, hero: HTMLElement) {
@@ -75,7 +75,7 @@ export async function mountHerd(stage: HTMLElement, hero: HTMLElement) {
     if(!width || !height) return
     heroHeight=hero.offsetHeight
     const portrait=width<height && width<900
-    const titleBottom=hero.querySelector('.role')!.getBoundingClientRect().bottom+window.scrollY
+    const titleBottom=hero.querySelector('h1')!.getBoundingClientRect().bottom+window.scrollY
     for(const [i,track] of tracks.entries()){
       const {lane,canvas}=track
       const progress=(track.x+track.span-previousWidth)/track.span

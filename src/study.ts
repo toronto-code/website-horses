@@ -1,6 +1,6 @@
 import { mountLettering } from './emboss/lettering'
 import { drawHorse, loadMaterials, drawingRate, FLIGHT_POSE, FRAME_WIDTH, FRAME_HEIGHT,
-  IDLE_POSE_STEP, POSE_COUNT, SEED_CYCLE } from './scene/frames'
+  IDLE_POSE_STEP, POSE_COUNT } from './scene/frames'
 
 async function study() {
   const materials=await loadMaterials()
@@ -12,16 +12,18 @@ async function study() {
   const sourceCrop=document.querySelector<HTMLCanvasElement>('#source-crop')!.getContext('2d')!
   sourceCrop.drawImage(source,427,187,300,140,0,0,300,140)
   const slider=document.querySelector<HTMLInputElement>('#frame')!
+  const strideDrawings=POSE_COUNT/IDLE_POSE_STEP,reviewDrawings=strideDrawings*3
+  slider.max=String(reviewDrawings-1)
   const seed=47
   function draw(canvas:HTMLCanvasElement,n:number) {
     drawHorse(canvas,materials,(FLIGHT_POSE+n*IDLE_POSE_STEP)%POSE_COUNT,n,seed)
   }
   function setFrame(frame:number) {
-    const f=(frame+SEED_CYCLE)%SEED_CYCLE
+    const f=(frame+reviewDrawings)%reviewDrawings
     slider.value=String(f)
     draw(pose,f)
     crop.clearRect(0,0,300,140);crop.drawImage(pose,226,58,300,140,0,0,300,140)
-    document.querySelector('#current')!.textContent=String(f+1).padStart(2,'0')+' / '+SEED_CYCLE
+    document.querySelector('#current')!.textContent=String(f+1).padStart(2,'0')+' / '+reviewDrawings
   }
   let timer=0
   const play=document.querySelector<HTMLButtonElement>('#play')!
@@ -32,7 +34,7 @@ async function study() {
   const fps=drawingRate(new URLSearchParams(location.search).get('drawnFps'))
   play.onclick=()=>{if(timer) pause();else {timer=window.setInterval(()=>setFrame(+slider.value+1),1000/fps);play.textContent='Pause'}}
   document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()})
-  for(let i=0;i<8;i++){
+  for(let i=0;i<strideDrawings;i++){
     const figure=document.createElement('figure'),canvas=document.createElement('canvas')
     canvas.width=FRAME_WIDTH;canvas.height=FRAME_HEIGHT;draw(canvas,i)
     const caption=document.createElement('figcaption');caption.textContent='Drawing '+String(i+1).padStart(2,'0')

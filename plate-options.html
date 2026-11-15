@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/src/style.css">
+  <title>Silver plate options</title>
+    <style>
+    .picker { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; flex-wrap: wrap; gap: 4px 14px;
+      padding: 12px var(--edge); font-size: .8rem; letter-spacing: .08em; }
+    .picker a { text-decoration: none; white-space: nowrap; }
+    .option { min-height: 100svh; position: relative; background-size: cover; background-position: center;
+      padding: clamp(96px, 14vh, 160px) var(--edge) 96px; }
+    .label { margin: 0 0 40px; font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+    .option .sample { max-width: 46ch; margin-top: 28px; font-size: var(--body); }
+    .horse-sample { position: absolute; right: 5vw; bottom: 7vh; width: min(56vw, 860px); pointer-events: none; }
+    .option.torch { background: radial-gradient(90% 90% at 35% 40%, #a0a0a0 0%, #818181 55%, #7a7a7a 100%); }
+    .live-plate { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .option.torch > :not(.live-plate) { position: relative; z-index: 1; }
+    .option.dark { color: #ece7dc; --relief: 0 .030em .045em rgb(0 0 0 / 70%), -.010em -.010em .015em rgb(255 255 255 / 15%); }
+    .option.dark .label { color: #cfc9bf; }
+    @media (max-width: 660px) { .horse-sample { right: 0; bottom: 4vh; width: 92vw; } }
+  </style>
+</head>
+<body id="top">
+  <nav class="picker" aria-label="Plate options">
+    <a href="#o1">1 Pearl</a><a href="#o2">2 Satin</a><a href="#o3">3 Sterling</a><a href="#o4">4 Graphite</a>
+    <a href="#o5">5 Charcoal</a><a href="#o6">6 Whisper</a><a href="#o7">7 Coarse</a><a href="#o8">8 Cool</a>
+    <a href="#o9">9 Warm</a><a href="#o10">10 Sanded</a><a href="#o11">11 Hairline</a><a href="#o12">12 Cross-hatch</a>
+    <a href="#o13">13 Orbital</a><a href="#o14">14 Tumbled</a><a href="#o15">15 Hammered</a><a href="#o16">16 Flake</a>
+    <a href="#o17">17 Frost</a><a href="#o18">18 Stonewash</a><a href="#o19">19 Cast</a><a href="#o20">20 Dragged</a>
+    <a href="#o21">21 Glare</a><a href="#o22">22 Paper</a><a href="#o23">23 Limewash</a><a href="#o24">24 Concrete</a>
+    <a href="#o25">25 Linen</a><a href="#o26">26 Leather</a><a href="#o27">27 Walnut</a><a href="#o28">28 Slate</a>
+    <a href="#o29">29 Terrazzo</a><a href="#o30">30 Chalk</a><a href="#o31">31 Frosted</a><a href="#o32">32 Red</a>
+  </nav>
+  <main>
+    <section class="option" id="o1" style="background-image:url(/plate-options/opt-01-pearl-blast.webp)">
+      <p class="label">01 · Pearl blast — today's plate: even midtone, fine sandblast grain</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o2" style="background-image:url(/plate-options/opt-02-satin-light.webp)">
+      <p class="label">02 · Satin light — one step lighter, slightly finer grain</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o3" style="background-image:url(/plate-options/opt-03-sterling.webp)">
+      <p class="label">03 · Sterling — brightest and smoothest, closest to polished silver</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o4" style="background-image:url(/plate-options/opt-04-graphite.webp)">
+      <p class="label">04 · Graphite — one step darker, same fine grain</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o5" style="background-image:url(/plate-options/opt-05-charcoal.webp)">
+      <p class="label">05 · Charcoal — darkest, a little more mottling; moodiest</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o6" style="background-image:url(/plate-options/opt-06-whisper.webp)">
+      <p class="label">06 · Whisper — same tone, grain turned way down: smooth satin</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o7" style="background-image:url(/plate-options/opt-07-coarse-blast.webp)">
+      <p class="label">07 · Coarse blast — same tone, bigger and heavier abrasive grain</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o8" style="background-image:url(/plate-options/opt-08-cool-steel.webp)">
+      <p class="label">08 · Cool steel — same tone with a blue cast</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o9" style="background-image:url(/plate-options/opt-09-warm-silver.webp)">
+      <p class="label">09 · Warm silver — same tone with a warm cast</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o10" style="background-image:url(/plate-options/opt-10-belt-sanded.webp)">
+      <p class="label">10 · Belt-sanded — same tone with directional sanded streaks</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o11" style="background-image:url(/plate-options/opt-11-hairline.webp)">
+      <p class="label">11 · Hairline — fine horizontal machining lines, satin-smooth</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o12" style="background-image:url(/plate-options/opt-12-crosshatch.webp)">
+      <p class="label">12 · Cross-hatch — two perpendicular brushed passes, linen-like</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o13" style="background-image:url(/plate-options/opt-13-orbital.webp)">
+      <p class="label">13 · Orbital — circular sanding swirls</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o14" style="background-image:url(/plate-options/opt-14-tumbled.webp)">
+      <p class="label">14 · Tumbled — pebbled matte, soft dapple</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o15" style="background-image:url(/plate-options/opt-15-hammered.webp)">
+      <p class="label">15 · Hammered — gently dimpled planishing</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o16" style="background-image:url(/plate-options/opt-16-flake.webp)">
+      <p class="label">16 · Flake — fine grain with glinting metal specks</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o17" style="background-image:url(/plate-options/opt-17-frost.webp)">
+      <p class="label">17 · Frost etch — deep gritty matte, the harshest grain</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o18" style="background-image:url(/plate-options/opt-18-stonewash.webp)">
+      <p class="label">18 · Stone-washed — sparse short scratches over satin</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o19" style="background-image:url(/plate-options/opt-19-cast.webp)">
+      <p class="label">19 · Cast — heavy soft mottle, mineral patches, little fine grain</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o20" style="background-image:url(/plate-options/opt-20-dragged.webp)">
+      <p class="label">20 · Dragged — long streaks with soft gaps, wire-brushed</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option torch" id="o21">
+      <canvas class="live-plate" aria-hidden="true"></canvas>
+      <p class="label">21 · Glare — photo-scanned steel; the light comes from wherever your cursor is</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">A photo-scanned pearl-blasted steel plate, physically shaded: it mirrors the room, and a lamp at your cursor sweeps real highlights across the grain.</p>
+    <section class="option" id="o22" style="background-image:url(/plate-options/opt-22-cotton-paper.webp)">
+      <p class="label">22 · Cotton paper — warm rag stock with fibers and laid lines</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o23" style="background-image:url(/plate-options/opt-23-limewash.webp)">
+      <p class="label">23 · Limewash — soft troweled plaster, warm gray</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o24" style="background-image:url(/plate-options/opt-24-concrete.webp)">
+      <p class="label">24 · Concrete — poured slab with pinholes and a hairline crack</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o25" style="background-image:url(/plate-options/opt-25-linen.webp)">
+      <p class="label">25 · Linen — oat plain weave</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option dark" id="o26" style="background-image:url(/plate-options/opt-26-bridle-leather.webp)">
+      <p class="label">26 · Bridle leather — tan, pebbled with creases</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option dark" id="o27" style="background-image:url(/plate-options/opt-27-walnut.webp)">
+      <p class="label">27 · Walnut — straight-grain veneer</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option dark" id="o28" style="background-image:url(/plate-options/opt-28-slate.webp)">
+      <p class="label">28 · Slate — honed blue-gray with silky strata</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o29" style="background-image:url(/plate-options/opt-29-terrazzo.webp)">
+      <p class="label">29 · Terrazzo — warm matrix with mineral chips</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option dark" id="o30" style="background-image:url(/plate-options/opt-30-chalkboard.webp)">
+      <p class="label">30 · Chalkboard — matte charcoal with chalk dust</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option" id="o31" style="background-image:url(/plate-options/opt-31-frosted-glass.webp)">
+      <p class="label">31 · Frosted glass — etched bloom over soft depth</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+    <section class="option dark" id="o32" style="background:#cc1f13">
+      <p class="label">32 · Red — flat colour, rgb(204 31 19)</p>
+      <h1>Rupert Kahng</h1>
+      <p class="role">Software Engineer</p>
+      <p class="sample">Sample body copy sits directly on the plate, so you can judge legibility and the raised relief against each finish.</p>
+      <img class="horse-sample" src="/plate-options/horse-sample.webp" alt="">
+    </section>
+  </main>
+  <script type="module">
+    import { mountLettering } from '/src/emboss/lettering.ts'
+    await mountLettering()
+  </script>
+  <script type="module">
+    // Glare plate: the baked grain becomes a normal map, and a soft light
+    // rides the cursor. The silver stays even everywhere; the grain genuinely
+    // catches the glare instead of sitting under a pasted glow.
+    const canvas = document.querySelector('.live-plate')
+    const section = canvas.closest('section')
+    const gl = canvas.getContext('webgl', { antialias: false, alpha: false })
+    if (!gl) {
+      canvas.remove()
+    } else {
+      const vertex = `
+        attribute vec2 corner;
+        varying vec2 vUv;
+        void main() {
+          vUv = corner * .5 + .5;
+          gl_Position = vec4(corner, 0., 1.);
+        }`
+      const fragment = `
+        precision highp float;
+        uniform sampler2D albedoMap;
+        uniform sampler2D normalMap;
+        uniform sampler2D roughMap;
+        uniform vec2 resolution;
+        uniform vec2 light;
+        uniform float lightZ;
+        varying vec2 vUv;
+
+        const float PI = 3.14159265;
+
+        float distributionGGX(float NdotH, float alpha) {
+          float a2 = alpha * alpha;
+          float d = NdotH * NdotH * (a2 - 1.) + 1.;
+          return a2 / (PI * d * d);
+        }
+        float geometrySmith(float NdotV, float NdotL, float alpha) {
+          float k = alpha / 2.;
+          float gv = NdotV / (NdotV * (1. - k) + k);
+          float gl = NdotL / (NdotL * (1. - k) + k);
+          return gv * gl;
+        }
+        vec3 fresnel(float cosTheta, vec3 F0) {
+          return F0 + (1. - F0) * pow(1. - cosTheta, 5.);
+        }
+
+        // A dim room with two softboxes: what the plate mirrors when the
+        // cursor light is elsewhere. Reflections are what read as "steel".
+        vec3 studio(vec3 R, float alpha) {
+          float rough = clamp((alpha - .04) / .96, 0., 1.);
+          float up = R.y * .5 + .5;
+          vec3 room = mix(vec3(.16, .16, .175), vec3(.74, .75, .79), smoothstep(.02, .98, up));
+          float box1 = pow(max(dot(R, normalize(vec3(-.38, .78, .50))), 0.), mix(900., 14., rough));
+          float box2 = pow(max(dot(R, normalize(vec3(.72, .30, .48))), 0.), mix(520., 10., rough));
+          room += vec3(1., .995, .97) * (box1 * 1.5 + box2 * .6);
+          return room;
+        }
+
+        vec3 tonemap(vec3 x) {
+          vec3 a = (x * (2.51 * x + .03)) / (x * (2.43 * x + .59) + .14);
+          return pow(clamp(a, 0., 1.), vec3(1. / 2.2));
+        }
+
+        void main() {
+          vec2 uv = gl_FragCoord.xy / (resolution.y * .55);
+          vec3 albedo = pow(texture2D(albedoMap, uv).rgb, vec3(2.2));
+          vec3 slope = texture2D(normalMap, uv).rgb * 2. - 1.;
+          slope.xy *= 1.7;
+          vec3 N = normalize(slope);
+          float rough = texture2D(roughMap, uv).r;
+          float alpha = clamp(mix(.22, .68, rough), .05, 1.);
+
+          vec3 V = vec3(0., 0., 1.);
+          float NdotV = max(dot(N, V), 1e-4);
+
+          vec3 toLight = vec3(light - gl_FragCoord.xy, lightZ);
+          float distance = length(toLight);
+          vec3 L = toLight / distance;
+          float NdotL = max(dot(N, L), 0.);
+          vec3 H = normalize(L + V);
+          float NdotH = max(dot(N, H), 0.);
+          float HdotV = max(dot(H, V), 0.);
+
+          vec3 F0 = mix(vec3(.55, .55, .56), albedo, .85);
+          vec3 F = fresnel(HdotV, F0);
+          float D = distributionGGX(NdotH, alpha);
+          float G = geometrySmith(NdotV, NdotL, alpha);
+          float radius = .60 * resolution.y;
+          float atten = 16. / (1. + distance * distance / (radius * radius));
+          vec3 radiance = vec3(.99, .99, 1.02) * atten;
+
+          vec3 specular = D * G * F / (4. * NdotV * max(NdotL, 1e-4)) * radiance * NdotL;
+          vec3 diffuse = albedo / PI * radiance * NdotL * .05;
+          vec3 reflection = reflect(-V, N);
+          vec3 ambient = studio(reflection, alpha) * fresnel(NdotV, F0) * 1.1
+                       + albedo * .045;
+
+          vec3 color = ambient + specular + diffuse;
+          gl_FragColor = vec4(tonemap(color), 1.);
+        }`
+      const compile = (type, source) => {
+        const shader = gl.createShader(type)
+        gl.shaderSource(shader, source)
+        gl.compileShader(shader)
+        return shader
+      }
+      const program = gl.createProgram()
+      gl.attachShader(program, compile(gl.VERTEX_SHADER, vertex))
+      gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragment))
+      gl.linkProgram(program)
+      gl.useProgram(program)
+      const corners = gl.createBuffer()
+      gl.bindBuffer(gl.ARRAY_BUFFER, corners)
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+      const corner = gl.getAttribLocation(program, 'corner')
+      gl.enableVertexAttribArray(corner)
+      gl.vertexAttribPointer(corner, 2, gl.FLOAT, false, 0, 0)
+
+      const loadTexture = (url, unit) => {
+        const image = new Image()
+        image.src = url
+        return image.decode().then(() => {
+          gl.activeTexture(gl.TEXTURE0 + unit)
+          const texture = gl.createTexture()
+          gl.bindTexture(gl.TEXTURE_2D, texture)
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image)
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)
+        })
+      }
+      await Promise.all([
+        loadTexture('/plate-options/metal-albedo.webp', 0),
+        loadTexture('/plate-options/metal-normal.webp', 1),
+        loadTexture('/plate-options/metal-rough.webp', 2),
+      ])
+      const uniform = (name) => gl.getUniformLocation(program, name)
+      gl.uniform1i(uniform('albedoMap'), 0)
+      gl.uniform1i(uniform('normalMap'), 1)
+      gl.uniform1i(uniform('roughMap'), 2)
+      const resolutionUniform = uniform('resolution')
+      const lightUniform = uniform('light')
+      const lightZUniform = uniform('lightZ')
+
+      let target = null
+      let light = null
+      const place = (event) => {
+        const box = canvas.getBoundingClientRect()
+        const scale = Math.min(2, window.devicePixelRatio || 1)
+        target = {
+          x: (event.clientX - box.left) * scale,
+          y: (box.height - (event.clientY - box.top)) * scale,
+        }
+      }
+      section.addEventListener('pointermove', place)
+      section.addEventListener('pointerdown', place)
+      section.addEventListener('pointerleave', () => { target = null })
+
+      const draw = (time, dt) => {
+        const scale = Math.min(2, window.devicePixelRatio || 1)
+        const width = Math.round(canvas.clientWidth * scale)
+        const height = Math.round(canvas.clientHeight * scale)
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width
+          canvas.height = height
+          gl.viewport(0, 0, width, height)
+        }
+        if (!target) {
+          const box = canvas.getBoundingClientRect()
+          target = {
+            x: box.width * (.5 + .26 * Math.sin(time * .00031)) * scale,
+            y: box.height * (.42 + .20 * Math.sin(time * .00023 + 1.7)) * scale,
+          }
+        }
+        if (!light) light = { ...target }
+        const ease = 1 - Math.exp(-dt * .008)
+        light.x += (target.x - light.x) * ease
+        light.y += (target.y - light.y) * ease
+        gl.uniform2f(resolutionUniform, canvas.width, canvas.height)
+        gl.uniform2f(lightUniform, light.x, light.y)
+        gl.uniform1f(lightZUniform, .45 * canvas.height)
+        gl.drawArrays(gl.TRIANGLES, 0, 3)
+      }
+      let previous = performance.now()
+      const frame = (time) => {
+        draw(time, Math.min(64, time - previous) || 16)
+        previous = time
+        requestAnimationFrame(frame)
+      }
+      requestAnimationFrame(frame)
+    }
+  </script>
+</body>
+</html>

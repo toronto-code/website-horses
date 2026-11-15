@@ -9,7 +9,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "bake:horse": "node tools/bake-horse/bake.mjs",
     "bake:plate": "python3 scripts/make-bg.py",
-    "bake:poses": "node tools/bake-horse/poses.mjs"
+    "bake:poses": "node tools/bake-horse/collected.mjs",
+    "bake:poses:original": "node tools/bake-horse/poses.mjs"
   },
   "devDependencies": {
     "sharp": "0.34.5",

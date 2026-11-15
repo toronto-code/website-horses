@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design directions — Rupert Kahng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Big+Shoulders+Display:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Saira+Stencil+One&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    :root {
+      --plate: #818181;
+      --plate-deep: #707070;
+      --ink: #141312;
+      --paper: #ecebe8;
+      --hair: rgba(20 19 18 / 55%);
+    }
+    html { background: var(--plate); }
+    body { margin: 0; background: var(--plate); color: var(--ink);
+      font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif; text-shadow: none; letter-spacing: normal; }
+    body::before { content: ''; position: fixed; inset: 0; z-index: -1;
+      background: var(--plate) url('/steel/landscape-2560.webp') center / cover; }
+    .dpicker { position: fixed; z-index: 50; inset: 0 0 auto; display: flex; flex-wrap: wrap; gap: 2px 12px;
+      padding: 10px 24px; font: 500 11px/1.4 'IBM Plex Mono', monospace; letter-spacing: .06em;
+      background: var(--ink); color: var(--paper); }
+    .dpicker a { color: inherit; text-decoration: none; }
+    .dpicker a:hover { text-decoration: underline; }
+    .doption { position: relative; min-height: 100svh; overflow: hidden; background: transparent;
+      color: var(--ink); padding: 72px clamp(20px, 5vw, 84px); }
+    .dtag { position: absolute; z-index: 9; left: 16px; bottom: 12px; font: 500 10px/1 'IBM Plex Mono', monospace;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--paper); opacity: .75; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+    .horse { position: absolute; pointer-events: none; }
+    .light { color: var(--paper); }
+
+    /* 01 — dataplate */
+    .d1 { display: grid; place-items: center; }
+    .plate-box { position: relative; width: min(680px, 92vw); border: 2px solid var(--ink);
+      background: rgb(130 130 130 / 18%); padding: 40px 44px 34px; }
+    .plate-box .screw { position: absolute; width: 13px; height: 13px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #d8d6d1 0 31%, #4a4a48 36% 58%, #9a9891 62% 100%); }
+    .screw.tl { top: 9px; left: 9px; } .screw.tr { top: 9px; right: 9px; }
+    .screw.bl { bottom: 9px; left: 9px; } .screw.br { bottom: 9px; right: 9px; }
+    .plate-head { display: flex; justify-content: space-between; font: 600 10px/1 'IBM Plex Mono', monospace;
+      letter-spacing: .22em; border-bottom: 1.5px solid var(--ink); padding-bottom: 10px; }
+    .plate-name { font-family: 'Archivo'; font-stretch: 118%; font-weight: 800; text-transform: uppercase;
+      font-size: clamp(38px, 7.2vw, 74px); line-height: .98; letter-spacing: .01em; margin: 26px 0 20px; }
+    .plate-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px;
+      border-top: 1.5px solid var(--ink); padding-top: 16px; }
+    .plate-specs div { font: 500 11px/1.55 'IBM Plex Mono', monospace; letter-spacing: .05em; text-transform: uppercase; }
+    .plate-specs b { display: block; font-weight: 600; font-size: 9px; letter-spacing: .22em; opacity: .7; margin-bottom: 2px; }
+    .d1 .horse { right: 6vw; bottom: 5vh; width: min(30vw, 430px); }
+
+    /* 02 — drawing sheet */
+    .d2 { padding: 0; }
+    .sheet { position: absolute; inset: clamp(14px, 2.5vw, 30px); border: 1.5px solid var(--ink); }
+    .sheet::after { content: ''; position: absolute; inset: 5px; border: 1px solid var(--hair); }
+    .tick { position: absolute; width: 17px; height: 17px; }
+    .tick::before, .tick::after { content: ''; position: absolute; background: var(--ink); }
+    .tick::before { left: 8px; top: 0; width: 1.5px; height: 17px; }
+    .tick::after { top: 8px; left: 0; height: 1.5px; width: 17px; }
+    .tick.tl2 { top: -9px; left: -9px; } .tick.tr2 { top: -9px; right: -9px; }
+    .tick.bl2 { bottom: -9px; left: -9px; } .tick.br2 { bottom: -9px; right: -9px; }
+    .dwg-name { position: absolute; top: 8.5vh; left: 7vw; font: 600 clamp(34px, 6vw, 72px)/1.02 'IBM Plex Mono', monospace;
+      letter-spacing: -.02em; }
+    .dwg-sub { position: absolute; top: calc(8.5vh + clamp(40px, 7vw, 84px)); left: 7vw;
+      font: 500 11px/1.7 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
+    .titleblock { position: absolute; right: 7vw; bottom: 9vh; border: 1.5px solid var(--ink); background: rgb(130 130 130 / 18%); }
+    .titleblock div { display: grid; grid-template-columns: auto auto; gap: 0 26px;
+      padding: 7px 12px; font: 500 10.5px/1.4 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+    .titleblock div + div { border-top: 1px solid var(--hair); }
+    .titleblock b { font-weight: 600; font-size: 9px; letter-spacing: .2em; opacity: .7; align-self: center; }
+    .dim { display: flex; align-items: center; gap: 10px; }
+    .dim::before, .dim::after { content: ''; height: 1.5px; background: var(--ink); width: clamp(40px, 8vw, 130px); }
+    .dwg-part { position: absolute; left: 50%; bottom: 13vh; transform: translateX(-64%); display: flex;
+      flex-direction: column; align-items: center; gap: 14px; }
+    .d2 .horse { position: static; width: min(40vw, 560px); }
+
+    /* 03 — swiss brutalist */
+    .d3 { display: flex; flex-direction: column; justify-content: flex-end;
+      background-image: repeating-linear-gradient(90deg, rgba(23 16 14 / 18%) 0 1px, transparent 1px calc(100% / 12)); }
+    .d3 .meta-row { position: absolute; top: 84px; left: clamp(20px, 5vw, 84px); right: clamp(20px, 5vw, 84px);
+      display: flex; justify-content: space-between; font: 500 11px/1 'IBM Plex Mono', monospace;
+      letter-spacing: .2em; text-transform: uppercase; }
+    .d3 .ghost { position: absolute; right: 2vw; top: 6vh; font-family: 'Archivo'; font-stretch: 80%;
+      font-weight: 700; font-size: clamp(140px, 26vw, 380px); line-height: 1; color: transparent;
+      -webkit-text-stroke: 1.5px rgba(242 233 222 / 55%); }
+    .brut-name { position: relative; z-index: 2; font-family: 'Archivo'; font-stretch: 125%; font-weight: 850;
+      text-transform: uppercase; font-size: clamp(52px, 12.4vw, 210px); line-height: .88; letter-spacing: -.015em; }
+    .brut-name small { display: block; font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-stretch: normal;
+      font-size: clamp(11px, 1.2vw, 15px); letter-spacing: .34em; margin: 26px 0 0 4px; }
+    .d3 .horse { position: relative; z-index: 1; right: auto; left: auto; bottom: auto; align-self: flex-end;
+      width: min(38vw, 560px); margin: -7vh 0 0; }
+
+    /* 04 — crate stencil */
+    .d4 { display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 6vw; }
+    .stencil-name { font-family: 'Saira Stencil One', Impact, 'Arial Black', sans-serif; text-transform: uppercase;
+      font-size: clamp(64px, 12.5vw, 200px); line-height: .9; letter-spacing: .005em; }
+    .crate-side { border: 3px solid var(--ink); padding: 26px 24px 22px; }
+    .crate-side .arrow { width: 0; height: 0; border-left: 26px solid transparent; border-right: 26px solid transparent;
+      border-bottom: 40px solid var(--ink); margin: 0 auto 14px; }
+    .crate-side p { margin: 0; text-align: center; font: 600 12px/1.6 'IBM Plex Mono', monospace;
+      letter-spacing: .26em; text-transform: uppercase; }
+    .barcode { margin-top: 18px; height: 44px; border: 1.5px solid var(--ink);
+      background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 9px, transparent 9px 12px,
+      var(--ink) 12px 13px, transparent 13px 18px); }
+    .crate-no { margin-top: 6px; text-align: center; font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .5em; }
+    .d4 .horse { position: absolute; right: 3vw; bottom: 4vh; width: min(30vw, 420px); opacity: .92; }
+
+    /* 05 — telemetry */
+    .d5 { display: flex; flex-direction: column; justify-content: center; }
+    .tele-top { position: absolute; top: 76px; left: clamp(20px, 5vw, 84px); right: clamp(20px, 5vw, 84px);
+      display: flex; gap: 26px; align-items: center; font: 500 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; }
+    .rec { width: 9px; height: 9px; border-radius: 50%; background: var(--paper); animation: blink 1.1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: .15; } }
+    .tele-name { font: 600 clamp(44px, 8.4vw, 120px)/1 'IBM Plex Mono', monospace; letter-spacing: -.03em; text-transform: uppercase; }
+    .tele-name .cursor { display: inline-block; width: .5em; height: .82em; background: var(--ink);
+      vertical-align: -0.08em; margin-left: .08em; animation: blink 1s steps(2) infinite; }
+    .tele-rows { margin-top: 38px; max-width: 560px; }
+    .tele-rows .row { display: flex; align-items: baseline; font: 500 13px/2.1 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+    .tele-rows .leader { flex: 1; border-bottom: 2px dotted rgba(23 16 14 / 65%); margin: 0 10px; transform: translateY(-4px); }
+    .d5 .horse { right: 5vw; bottom: 8vh; width: min(40vw, 600px); }
+    .d5 .horse-wrap { position: absolute; right: 5vw; bottom: 8vh; width: min(40vw, 600px); }
+    .d5 .horse-wrap::after { content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(23 16 14 / 28%) 0 1px, transparent 1px 4px); }
+
+    /* 06 — condensed signage */
+    .d6 { display: flex; flex-direction: column; justify-content: center; }
+    .sign-hair { height: 1.5px; background: var(--ink); width: 100%; }
+    .sign-name { font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight: 700; text-transform: uppercase;
+      font-size: clamp(80px, 17.5vw, 300px); line-height: .84; text-align: center; letter-spacing: .015em;
+      margin: 3vh 0; position: relative; z-index: 2; }
+    .sign-role { text-align: center; font: 500 clamp(10px, 1.1vw, 13px)/1 'IBM Plex Mono', monospace;
+      letter-spacing: .58em; text-transform: uppercase; padding: 2.6vh 0 3vh; }
+    .d6 .horse { left: 50%; transform: translateX(-50%); top: 50%; margin-top: -12vh; width: min(52vw, 760px); z-index: 1; }
+    .d6 .ghost { position: absolute; right: 3vw; bottom: 4vh; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight: 800;
+      font-size: clamp(120px, 20vw, 300px); line-height: .8; color: transparent;
+      -webkit-text-stroke: 1.5px rgba(242 233 222 / 4%); -webkit-text-stroke: 1.5px rgba(242 233 222 / 38%); z-index: 0; }
+
+    /* 07 — vertical poster */
+    .d7 .rail { position: absolute; left: clamp(10px, 2.2vw, 30px); top: 50%; transform: translateY(-50%);
+      writing-mode: vertical-rl; font-family: 'Archivo'; font-stretch: 110%; font-weight: 600; text-transform: uppercase;
+      font-size: 13px; letter-spacing: .42em; }
+    .d7 .rail.outline { left: auto; right: clamp(10px, 2.2vw, 30px); color: transparent;
+      -webkit-text-stroke: 1px var(--ink); }
+    .d7 .band { position: absolute; left: -10%; right: -10%; top: 50%; height: clamp(90px, 16vh, 150px);
+      background: var(--ink); transform: rotate(-11deg); }
+    .d7 .horse { left: 50%; top: 50%; transform: translate(-50%, -58%); width: min(56vw, 820px); }
+    .d7 .poster-name { position: absolute; left: clamp(64px, 10vw, 160px); top: 12vh;
+      font-family: 'Archivo'; font-stretch: 122%; font-weight: 850; text-transform: uppercase;
+      font-size: clamp(44px, 8.6vw, 130px); line-height: .92; }
+    .d7 .poster-meta { position: absolute; right: clamp(64px, 10vw, 160px); bottom: 11vh; text-align: right;
+      font: 500 11.5px/2 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
+    .d7 .poster-name span { color: var(--paper); }
+
+    /* 08 — hazard band */
+    .d8 { display: flex; flex-direction: column; justify-content: center; }
+    .hazard { position: absolute; left: 0; right: 0; height: clamp(18px, 3.4vh, 30px);
+      background: repeating-linear-gradient(-45deg, var(--ink) 0 16px, var(--paper) 16px 32px); }
+    .hazard.top { top: 0; } .hazard.bottom { bottom: 0; }
+    .haz-name { font-family: 'Archivo'; font-stretch: 114%; font-weight: 900; text-transform: uppercase;
+      font-size: clamp(54px, 11.6vw, 190px); line-height: .9; letter-spacing: -.01em; }
+    .caution { display: inline-block; margin-top: 5vh; background: var(--paper); color: var(--ink);
+      border: 2.5px solid var(--ink); padding: 16px 22px; font: 500 12px/1.75 'IBM Plex Mono', monospace;
+      letter-spacing: .14em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); }
+    .caution b { font-weight: 700; letter-spacing: .3em; }
+    .d8 .horse { right: 6vw; bottom: 9vh; width: min(30vw, 430px); }
+
+    /* 09 — marquee */
+    .d9 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+    .strip { position: relative; width: 100vw; margin-left: calc(50% - 50vw); overflow: hidden;
+      border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+    .strip + .strip { border-top: none; }
+    .strip .track { display: flex; width: max-content; animation: slide 22s linear infinite; }
+    .strip.rev .track { animation-direction: reverse; }
+    .strip span { padding: 10px 0; font-family: 'Archivo'; font-stretch: 110%; font-weight: 700;
+      text-transform: uppercase; font-size: clamp(15px, 2.2vw, 26px); letter-spacing: .12em; white-space: nowrap; }
+    .strip i { font-style: normal; margin: 0 18px; font-family: 'IBM Plex Mono', monospace; font-weight: 500; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    .marq-center { padding: 6vh 0; text-align: center; position: relative; }
+    .marq-name { font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase;
+      font-size: clamp(56px, 11vw, 170px); line-height: .95; letter-spacing: -.02em; }
+    .d9 .horse { left: 50%; transform: translateX(-50%); bottom: auto; top: 50%; width: min(40vw, 580px);
+      margin-top: -6vh; z-index: 0; }
+    .marq-name { position: relative; z-index: 2; }
+
+    /* 10 — riveted badge */
+    .d10 { display: grid; place-items: center; }
+    .badge { position: relative; background: var(--plate-deep); border: 1px solid rgba(20 19 18 / .5);
+      box-shadow: inset 0 1px 0 rgba(255 255 255 / .07), inset 0 -2px 0 rgba(0 0 0 / .22);
+      padding: clamp(36px, 6vh, 64px) clamp(44px, 8vw, 110px); text-align: center; }
+    .rivet { position: absolute; width: 15px; height: 15px; border-radius: 50%;
+      background: radial-gradient(circle at 34% 30%, #d8d6d1 0 27%, #3f3f3d 32% 55%, #9a9891 60% 100%); }
+    .rivet.tl { top: 12px; left: 12px; } .rivet.tr { top: 12px; right: 12px; }
+    .rivet.bl { bottom: 12px; left: 12px; } .rivet.br { bottom: 12px; right: 12px; }
+    .badge .emboss { font-size: clamp(44px, 7.4vw, 104px); width: auto; margin: 0 auto; }
+    .badge .badge-sub { margin: 18px 0 0; font: 500 11px/1 'IBM Plex Mono', monospace;
+      letter-spacing: .46em; text-transform: uppercase; color: var(--paper); }
+    .badge-nav { display: flex; gap: clamp(18px, 3vw, 44px); justify-content: center; margin-top: 6vh;
+      font: 500 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .22em; text-transform: uppercase; }
+    .badge-nav a { color: var(--paper); text-decoration: none; border-bottom: 1.5px solid rgba(242 233 222 / .4); padding-bottom: 5px; }
+    .d10 .horse { left: 50%; transform: translateX(-50%); bottom: 4vh; width: min(34vw, 500px); }
+
+    @media (max-width: 720px) {
+      .d4 { grid-template-columns: 1fr; }
+      .d7 .poster-name { left: 40px; }
+      .d2 .dim { display: none; }
+    }
+  </style>
+</head>
+<body id="top">
+  <nav class="dpicker" aria-label="Design directions">
+    <a href="#d1">01 Dataplate</a><a href="#d2">02 Drawing</a><a href="#d3">03 Swiss</a><a href="#d4">04 Crate</a>
+    <a href="#d5">05 Telemetry</a><a href="#d6">06 Signage</a><a href="#d7">07 Poster</a><a href="#d8">08 Hazard</a>
+    <a href="#d9">09 Marquee</a><a href="#d10">10 Badge</a>
+  </nav>
+  <main>
+    <section class="doption d1" id="d1">
+      <div class="plate-box">
+        <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
+        <div class="plate-head"><span>MODEL RK-01</span><span>SERIES 2026</span><span>TYPE: PORTFOLIO</span></div>
+        <div class="plate-name">Rupert Kahng</div>
+        <div class="plate-specs">
+          <div><b>Designation</b>Software Engineer</div>
+          <div><b>Duty</b>Continuous</div>
+          <div><b>Systems</b>Web / Graphics / Infra</div>
+          <div><b>Serial No.</b>RK-2026-11</div>
+        </div>
+      </div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <span class="dtag">01 · Dataplate — Archivo + Plex Mono</span>
+    </section>
+
+    <section class="doption d2" id="d2">
+      <div class="sheet">
+        <span class="tick tl2"></span><span class="tick tr2"></span><span class="tick bl2"></span><span class="tick br2"></span>
+      </div>
+      <div class="dwg-name">RUPERT<br>KAHNG</div>
+      <div class="dwg-sub">Software Engineer — Portfolio<br>SHT 01 · SCALE 1:1</div>
+      <div class="titleblock mono">
+        <div><b>Title</b><span>RUPERT KAHNG — PORTFOLIO</span></div>
+        <div><b>Drawn</b><span>R.K.</span></div>
+        <div><b>Rev</b><span>A / 2026-11</span></div>
+      </div>
+      <div class="dwg-part">
+        <div class="dim"><span class="mono" style="font-size:10.5px;letter-spacing:.2em;">HORSE_LENGTH 490</span></div>
+        <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      </div>
+      <span class="dtag">02 · Drawing sheet — Plex Mono</span>
+    </section>
+
+    <section class="doption d3" id="d3">
+      <div class="meta-row"><span>RK — Portfolio</span><span>Software Engineer</span><span>2026 / SHT 01</span></div>
+      <div class="ghost">03</div>
+      <div class="brut-name">Rupert<br>Kahng<small>Software Engineer — Works 2023—2026</small></div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <span class="dtag">03 · Swiss brutalist — Archivo 125</span>
+    </section>
+
+    <section class="doption d4" id="d4">
+      <div>
+        <div class="stencil-name">RUPERT<br>KAHNG</div>
+      </div>
+      <div class="crate-side">
+        <div class="arrow"></div>
+        <p>Software<br>Engineer<br>Handle with care</p>
+        <div class="barcode"></div>
+        <div class="crate-no">RK-2026-11</div>
+      </div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <span class="dtag">04 · Crate stencil — Saira Stencil One</span>
+    </section>
+
+    <section class="doption d5" id="d5">
+      <div class="tele-top"><span class="rec"></span><span>REC — GAITS: GALLOP</span><span>STRIDE 12.4 Hz</span><span>T+00:04:17</span></div>
+      <div>
+        <div class="tele-name">RUPERT<br>KAHNG<span class="cursor"></span></div>
+        <div class="tele-rows">
+          <div class="row"><span>DESIGNATION</span><span class="leader"></span><span>SOFTWARE ENGINEER</span></div>
+          <div class="row"><span>POSE</span><span class="leader"></span><span>21 / 24 FLIGHT</span></div>
+          <div class="row"><span>DRAW RATE</span><span class="leader"></span><span>10 FPS</span></div>
+          <div class="row"><span>STATUS</span><span class="leader"></span><span>SHIPPING</span></div>
+        </div>
+      </div>
+      <div class="horse-wrap"><img class="horse" src="/plate-options/horse-sample.webp" alt="" style="position:static;width:100%;"></div>
+      <span class="dtag">05 · Telemetry — Plex Mono</span>
+    </section>
+
+    <section class="doption d6" id="d6">
+      <div class="ghost">06</div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <div class="sign-hair"></div>
+      <div class="sign-name">Rupert Kahng</div>
+      <div class="sign-hair"></div>
+      <div class="sign-role">Software Engineer</div>
+      <span class="dtag">06 · Condensed signage — Big Shoulders</span>
+    </section>
+
+    <section class="doption d7" id="d7">
+      <div class="rail">RUPERT KAHNG — SOFTWARE ENGINEER — PORTFOLIO</div>
+      <div class="rail outline">RK 2026 · SHT 01 · REV A · NORTH UP</div>
+      <div class="band"></div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <div class="poster-name">RUPERT<br><span>KAHNG</span></div>
+      <div class="poster-meta">X 0512 · Y 0288<br>Software Engineer<br>Grid 01 — North up</div>
+      <span class="dtag">07 · Vertical poster — Archivo 122</span>
+    </section>
+
+    <section class="doption d8" id="d8">
+      <div class="hazard top"></div>
+      <div class="hazard bottom"></div>
+      <div>
+        <div class="haz-name">RUPERT<br>KAHNG</div>
+        <div class="caution"><b>Caution</b> — operates continuously<br>may ship to production</div>
+      </div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <span class="dtag">08 · Hazard band — Archivo 900</span>
+    </section>
+
+    <section class="doption d9" id="d9">
+      <div class="strip"><div class="track">
+        <span>Rupert Kahng<i>●</i>Software Engineer<i>●</i>Rupert Kahng<i>●</i>Software Engineer<i>●</i></span>
+        <span>Rupert Kahng<i>●</i>Software Engineer<i>●</i>Rupert Kahng<i>●</i>Software Engineer<i>●</i></span>
+      </div></div>
+      <div class="marq-center">
+        <div class="marq-name">RUPERT<br>KAHNG</div>
+      </div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <div class="strip rev"><div class="track">
+        <span>Portfolio<i>●</i>2026<i>●</i>Sheet 01<i>●</i>Rev A<i>●</i>Portfolio<i>●</i>2026<i>●</i>Sheet 01<i>●</i>Rev A<i>●</i></span>
+        <span>Portfolio<i>●</i>2026<i>●</i>Sheet 01<i>●</i>Rev A<i>●</i>Portfolio<i>●</i>2026<i>●</i>Sheet 01<i>●</i>Rev A<i>●</i></span>
+      </div></div>
+      <span class="dtag">09 · Marquee — Space Grotesk</span>
+    </section>
+
+    <section class="doption d10" id="d10">
+      <div>
+        <div class="badge">
+          <span class="rivet tl"></span><span class="rivet tr"></span><span class="rivet bl"></span><span class="rivet br"></span>
+          <h1 id="name" class="emboss">Rupert Kahng</h1>
+          <p class="badge-sub">Software Engineer — Est. 2026</p>
+        </div>
+        <nav class="badge-nav"><a href="#">Projects</a><a href="#">About</a><a href="#">Contact</a></nav>
+      </div>
+      <img class="horse" src="/plate-options/horse-sample.webp" alt="">
+      <span class="dtag">10 · Riveted badge — raised silver lettering</span>
+    </section>
+  </main>
+  <script type="module">
+    import { mountLettering } from '/src/emboss/lettering.ts'
+    await mountLettering()
+  </script>
+</body>
+</html>

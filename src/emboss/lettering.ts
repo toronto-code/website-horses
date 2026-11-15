@@ -98,7 +98,7 @@ function render(element: HTMLElement) {
 
 export async function mountLettering() {
   await document.fonts.ready
-  const headings = document.querySelectorAll<HTMLElement>('h1,h2')
+  const headings = document.querySelectorAll<HTMLElement>('h1:not(.wordmark),h2')
   const observer = new ResizeObserver(entries => {
     for (const {target} of entries) render(target as HTMLElement)
   })
